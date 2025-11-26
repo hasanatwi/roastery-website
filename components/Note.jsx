@@ -1,0 +1,54 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import DisplayProducts from "./DisplayProducts.jsx";
+import Header from "./Header";
+import coffeeBeans from "../src/assets/images/coffee and beans.png";
+function Note({ isValid2, nameOfTheUser }) {
+  return (
+    <div>
+      <Header isValid2={isValid2} nameOfTheUser={nameOfTheUser} />
+      <div
+        style={{
+          backgroundImage: `url(${coffeeBeans})`,
+          backgroundSize: "1600px 600px",
+          backgroundRepeat: "no-repeat",
+          height: "600px",
+        }}
+      >
+        <div className="margin">
+          <h1>
+            FRESHLY ROASTED
+            <br />
+            COFFEE
+          </h1>
+          <p>
+            Discover the flavor of our freshly roasted coffee.
+            <br />
+            Each batch is carefully crafted to ensure
+            <br /> the highest quality.
+          </p>
+          <Link to="/shop">
+            <button className="shopNow">SHOP NOW</button>
+          </Link>
+        </div>
+      </div>
+      <div className="AboutUs">
+        <h1>About Golden Nuts</h1>
+        <p>
+          Welcome to Golden Bean Roastery! We are a small, family-owned coffee
+          roastery
+          <br /> dedicated to sourcing and roasting the highest quality coffee
+          beans. Our passion
+          <br /> for coffee is reflected in every cup
+        </p>
+        <h2>Contact Us</h2>
+        <p>
+          25/810677
+          <br />
+          +961 78933282
+        </p>
+      </div>
+    </div>
+  );
+}
+export default Note;
