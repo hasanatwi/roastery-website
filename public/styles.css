@@ -67,12 +67,36 @@
   font-weight: bold;
   margin-right: 25px;
   color: black;
+
   width: 180px;
-  height: 40px;
+  height: 60px;
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  gap: 2px;  /* <-- controls distance between name and button */
 }
+
+/* Remove default margin from <p> */
+.margin3 p {
+  margin: 0;
+}
+
+/* Optional: remove button margin if needed */
+.margin3 button {
+  margin: 0;
+  background-color:#8b4513;
+  font-size:17px;
+  font-weight:bold;
+  border: 3px solid black;   /* <-- thicker border line */
+  border-radius: 5px; 
+  color:white;
+}
+
+
+
 .margin button {
   height: 60px;
   width: 120px;
@@ -414,4 +438,9 @@
     padding: 8px 10px;
     font-size: 12px;
   }
+}
+.vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

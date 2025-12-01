@@ -93,6 +93,16 @@ app.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+  app.get("/logout", (req, res, next) => {
+    console.log("the /logout has been entered");
+    req.logout(function (err) {
+      if (err) return next(err);
+      res.clearCookie("connect.sid"); // optional but good
+      res.status(200).json({ message: "Logged out" });
+    });
+  });
+
+
 passport.serializeUser((user, cb) => cb(null, user));
 passport.deserializeUser((user, cb) => cb(null, user));
 

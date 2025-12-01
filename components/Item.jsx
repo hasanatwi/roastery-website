@@ -123,6 +123,18 @@ function Item({ isValid2, nameOfTheUser, email2 }) {
                 window.location.href = "/sign_in";
                 return;
               }
+              if(weight===0 && quantity===0){
+                alert("Choose certain quantity and weight");
+                return;
+              }
+              else if(weight===0){
+                  alert("Choose a certain weight");
+                  return;
+              }
+              if(quantity===0){
+                alert("Choose a certain quantity");
+                return;
+              } 
               fetch(
                 `/api/someEndpoint?title=${title}&totalWeight=${totalWeight}&totalPrice=${totalPrice}&email2=${email2}&nameOfTheUser=${nameOfTheUser}`
               )

@@ -1,9 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import DisplayProducts from "./DisplayProducts.jsx";
 import Header from "./Header";
 import coffeeBeans from "../src/assets/images/coffee and beans.png";
 function Note({ isValid2, nameOfTheUser }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   return (
     <div>
       <Header isValid2={isValid2} nameOfTheUser={nameOfTheUser} />
@@ -33,7 +45,7 @@ function Note({ isValid2, nameOfTheUser }) {
         </div>
       </div>
       <div className="AboutUs">
-        <h1>About Golden Nuts</h1>
+        <h1 id="about-us">About Golden Nuts</h1>
         <p>
           Welcome to Golden Bean Roastery! We are a small, family-owned coffee
           roastery
@@ -41,7 +53,7 @@ function Note({ isValid2, nameOfTheUser }) {
           beans. Our passion
           <br /> for coffee is reflected in every cup
         </p>
-        <h2>Contact Us</h2>
+        <h2 id="contact-us">Contact Us</h2>
         <p>
           25/810677
           <br />
