@@ -15,11 +15,15 @@ function Header({ isValid2, nameOfTheUser }) {
         <Link to="/">
           <button>HOME</button>
         </Link>
-        <a href="/#about-us"><button>ABOUT US</button></a>
+        <a href="/#about-us">
+          <button>ABOUT US</button>
+        </a>
         <Link to="/cart">
           <button>CART</button>
         </Link>
-        <a href="/#contact-us"><button>CONTACT</button></a>
+        <a href="/#contact-us">
+          <button>CONTACT</button>
+        </a>
       </div>
       {!isValid2 && (
         <div className="margin2">
@@ -35,17 +39,16 @@ function Header({ isValid2, nameOfTheUser }) {
         <div className="margin3 vertical">
           <p>{nameOfTheUser}</p>
           <button
-          onClick={async () => {
-            await fetch("http://localhost:3000/logout", {
-              method: "GET",
-              credentials: "include",
-            });
-            window.location.href = "/";
-          }}
-        >
-          Log Out
-        </button>
-
+            onClick={async () => {
+              await fetch("http://localhost:3000/logout", {
+                method: "GET",
+                credentials: "include",
+              });
+              window.location.href = "/";
+            }}
+          >
+            Log Out
+          </button>
         </div>
       )}
     </div>

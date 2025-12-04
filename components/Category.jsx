@@ -26,7 +26,7 @@ function Category(props) {
             src={props.image}
             alt={props.title}
             style={{
-              width: "280px",
+              width: "270px",
               height: "200px",
               objectFit: "cover",
             }}
@@ -39,7 +39,7 @@ function Category(props) {
             src={props.image}
             alt={props.title}
             style={{
-              width: "280px",
+              width: "270px",
               height: "200px",
               objectFit: "cover",
             }}
@@ -54,7 +54,22 @@ function Category(props) {
             src={props.image}
             alt={props.title}
             style={{
-              width: "280px",
+              width: "270px",
+              height: "200px",
+              objectFit: "cover",
+            }}
+          />
+        </Link>
+      )}
+      {!matchesCategory && props.title === "coffee" && (
+        <Link
+          to={`/item/${props.name_of_the_category}/${props.title}/${props.email2}`}
+        >
+          <img
+            src={props.image}
+            alt={props.title}
+            style={{
+              width: "270px",
               height: "200px",
               objectFit: "cover",
             }}

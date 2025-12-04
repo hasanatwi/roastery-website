@@ -26,7 +26,6 @@ function Item({ isValid2, nameOfTheUser, email2 }) {
   }
 
   useEffect(() => {
-    console.log("Fetching:", name_of_the_category, title);
     fetch(
       `/api/item/${name_of_the_category}/${title}?name=${nameOfTheUser}&email=${email2}`
     )
@@ -52,7 +51,7 @@ function Item({ isValid2, nameOfTheUser, email2 }) {
           {product.image ? (
             <img
               className="itemSizeOfImage"
-              src={`data:image/jpeg;base64,${product.image}`}
+              src={product.image}
               alt={title}
               style={{ width: "400px", height: "auto" }}
             />
@@ -123,21 +122,18 @@ function Item({ isValid2, nameOfTheUser, email2 }) {
                 window.location.href = "/sign_in";
                 return;
               }
-              if(weight===0 && quantity===0){
+              if (weight === 0 && quantity === 0) {
                 alert("Choose certain quantity and weight");
                 return;
+              } else if (weight === 0) {
+                alert("Choose a certain weight");
+                return;
               }
-              else if(weight===0){
-                  alert("Choose a certain weight");
-                  return;
-              }
-              if(quantity===0){
+              if (quantity === 0) {
                 alert("Choose a certain quantity");
                 return;
-              } 
-              fetch(
-                `/api/someEndpoint?title=${title}&totalWeight=${totalWeight}&totalPrice=${totalPrice}&email2=${email2}&nameOfTheUser=${nameOfTheUser}`
-              )
+              }
+              fetch(`/api/someEndpoint?title=${encodeURIComponent(title)}&totalWeight=${totalWeight}&totalPrice=${totalPrice}&email2=${encodeURIComponent(email2)}&nameOfTheUser=${encodeURIComponent(nameOfTheUser)}`)
                 .then((res) => res.json())
                 .then((data) => console.log(data))
                 .catch((err) => console.error(err));

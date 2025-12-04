@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import DisplayProducts from "./DisplayProducts.jsx";
 import Header from "./Header";
-import coffeeBeans from "../src/assets/images/coffee and beans.png";
+const coffeeBeans="https://lkxdeoexdxrizzkblvac.supabase.co/storage/v1/object/public/product-images/coffee%20and%20beans.png";
 function Note({ isValid2, nameOfTheUser }) {
   const location = useLocation();
 

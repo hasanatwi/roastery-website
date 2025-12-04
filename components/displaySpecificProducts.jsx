@@ -6,14 +6,38 @@ import Header from "./Header";
 function DisplaySpecificProducts({ isValid2, nameOfTheUser }) {
   const { title } = useParams();
   const [products, setProducts] = useState([]);
-  console.log("the value of isValid2 is:", isValid2);
-  console.log("the value of nameOfTheUser is:", nameOfTheUser);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/products/${title}`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Error fetching specific products:", err));
+    const fetchData = async () => {
+      setLoading(true);
+      setError("");
+      
+      try {
+        console.log(`📡 Fetching: ${title}`);
+        const response = await fetch(`/api/products/${title}`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log(`✅ Received ${Array.isArray(data) ? data.length : '?'} products`);
+        console.log("Sample product:", data[0]);
+        
+        setProducts(Array.isArray(data) ? data : []);
+        
+      } catch (err) {
+        console.error("❌ Fetch error:", err);
+        setError(err.message);
+        setProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [title]);
 
   return (
@@ -21,16 +45,38 @@ function DisplaySpecificProducts({ isValid2, nameOfTheUser }) {
       <Header isValid2={isValid2} nameOfTheUser={nameOfTheUser} />
       <div className="displayProducts">
         <h1 className="Products">{title}</h1>
-        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-          {products.map((product) => (
-            <Category
-              key={product.id}
-              image={`data:image/jpeg;base64,${product.image}`}
-              title={product.name_of_product}
-              name_of_the_category={title}
-            />
-          ))}
-        </div>
+        
+        {loading && <p>Loading {title}...</p>}
+        
+        {error && (
+          <div style={{ color: "red", padding: "20px" }}>
+            <h3>Error loading {title}:</h3>
+            <p>{error}</p>
+            <p>Try: http://localhost:3000/api/products/{encodeURIComponent(title)}</p>
+          </div>
+        )}
+        
+        {!loading && !error && products.length === 0 && (
+          <p>No products found in {title} category</p>
+        )}
+        
+        {!loading && !error && products.length > 0 && (
+          <div style={{ 
+            display: "flex", 
+            gap: "20px", 
+            flexWrap: "wrap",
+            padding: "20px" 
+          }}>
+            {products.map((product) => (
+              <Category
+                key={product.id}
+                image={product.image}
+                title={product.name_of_product}
+                name_of_the_category={title}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

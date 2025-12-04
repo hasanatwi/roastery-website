@@ -36,7 +36,6 @@ function UserProducts({ email, nameOfTheUser }) {
   if (error) return <p>Error: {error}</p>;
   if (!products.length) return <p>No products found for this email.</p>;
 
- 
   const totalPriceAll = products
     .reduce((sum, p) => sum + Number(p.totalprice), 0)
     .toFixed(2);
